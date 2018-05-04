@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, NavLink, Switch } from 'react-router-dom';
 import { Navbar, NavItem, Card, CardTitle, Row, Col} from 'react-materialize';
 import Articles from './components/Articles';
 import Article from './components/Article';
 import Search from './components/Search';
+import UserLogin from './components/UserLogin';
 import * as API from './API';
 
 class App extends Component {
   state = {
     articles: [],
     loading: true,
-    searchTerm: ""
+    searchTerm: "",
+    currentUser: {},
+    loggedIn: false
   }
 
   componentDidMount(){
     API.getArticles()
-      .then((articles) => {
+      .then(articles => {
         this.setState({
           articles,
           loading: false,
-          displaySearch: articles
         })
       })
   }
@@ -39,11 +41,18 @@ class App extends Component {
               <li><NavLink to="/topics/coding">Coding</NavLink></li>
               <li><NavLink to="/topics/football">Football</NavLink></li>
               <li><NavLink to="/topics/cooking">Cooking</NavLink></li>
+              <li><UserLogin 
+              getUser={this.getUser} 
+              currentUser={this.state.currentUser}
+              loggedIn={this.state.loggedIn}
+              />
+              </li>
             </Navbar>  
-            
+
             <Route exact path="/" render={(props) => <Articles {...props} articles={this.state.articles} searchTerm={this.state.searchTerm}/>}/>
-            <Route path="/topics/:topic_id" render={(props) => <Articles {...props} articles={this.state.articles}/>}/>
-            <Route path="/articles/:article_id" render={(props) => <Article {...props} articles={this.state.articles}/>}/>
+            <Route path="/topics/:topic_id" render={(props) => <Articles {...props} articles={this.state.articles} searchTerm={this.state.searchTerm}/>}/>
+            <Route path="/articles/:article_id" render={(props) => <Article {...props} articles={this.state.articles} currentUser={this.state.currentUser}/>}/>
+            {/* <Route path="/users/:username" render={(props) => <UserProfile {...props}/>}/> */}
           </div> 
         </Router>      
     );
@@ -53,6 +62,16 @@ class App extends Component {
     this.setState({
       searchTerm: event.target.value
     })
+  }
+
+  getUser = (name) => {
+    API.getUser(name)
+    .then((user) => {  
+        this.setState({
+            currentUser: user,
+            loggedIn: true
+          })
+      })
   }
 } 
 

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Articles ({ articles, match, searchTerm }) {
     const topic = match.params.topic_id;
-    let displayArticles = articles.filter(article => topic ? article.belongs_to === topic : true)
+    let displayArticles = articles.filter(article => topic ? article.belongs_to.title.toLowerCase() === topic : true)
     if(searchTerm) displayArticles = articles.filter((article) => {
         if(article.title.toLowerCase().includes(searchTerm.toLowerCase()) || article.body.toLowerCase().includes(searchTerm.toLowerCase()))
         return true

@@ -1,15 +1,12 @@
 import React from 'react';
 import PT from 'prop-types';
-import { Row, Col } from 'react-materialize'; 
+import { Row, Input, Icon } from 'react-materialize'; 
 
 function Search ({ onSearchChange }) {
         return (
-            <div>
+        <div>
             <Row>
-              <Col 
-              s={8}><input onChange={onSearchChange} />
-              <label for="icon_prefix">Search</label>
-              </Col>
+                <Input s={8} placeholder="Search" onChange={onSearchChange}><Icon>search</Icon></Input>
             </Row>  
         </div>
         );
