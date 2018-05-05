@@ -1,8 +1,4 @@
-.App {
-  text-align: right;
-}
-
-.App-logo {
+.React-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
@@ -23,6 +19,19 @@
   font-size: large;
 }
 
+.card.small {
+  height: auto;
+}
+.card.small .card-content {
+  height: auto;
+}
+.card.small .card-action {
+  position: relative;
+}
+
+.read-more {
+  text-align: right;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

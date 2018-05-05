@@ -1,7 +1,6 @@
 import React from 'react';
 import PT from 'prop-types';
-import { Card, CardTitle, CardPanel, Input, Button } from 'react-materialize';
-import { Link } from 'react-router-dom';
+import { CardPanel, Chip } from 'react-materialize';
 import Comment from './Comment';
 import * as API from '../API';
 
@@ -31,16 +30,18 @@ class Comments extends React.Component {
     }    
 
     render () {
-        console.log(this.state.comments)
         return (
             <div>
                 <Comment addComment={this.addComment} handleAddComment={this.handleAddComment} newComment={this.state.newComment}/>
                 {this.state.comments.map(comment => {
                     return (
-                        <div>
+                        <div key={comment._id}>
                             <CardPanel>
-                                <img class="circle" height="60" width="60" src={`${comment.created_by.avatar_url}`}></img>
-                                {`${comment.created_by.name}: ${comment.body}`}
+                                <Chip><img className="circle" alt=''
+                                        src={`${comment.created_by.avatar_url}`} height="50" width="50"/>
+                                        {comment.created_by.name}
+                                </Chip>
+                                {comment.body}
                             </CardPanel>    
                         </div>    
                     );
@@ -58,10 +59,8 @@ class Comments extends React.Component {
     addComment = (articleId, comment) => {
         const body = {
             body: comment,
-            created_by: this.props.currentUser._id
+            created_by: this.props.currentUser._id || "5aec866a5dd13f4c48a7d930"
         }
-        console.log(body)
-        console.log(this.props.articleId)
         API.postComment(this.props.articleId, body)
         this.setState({
             comments: [...this.state.comments, body]
@@ -69,7 +68,8 @@ class Comments extends React.Component {
     }
 
     static propTypes = {
-    
+        articleId: PT.string.isRequired,
+        currentUser: PT.object.isRequired
     }
 }
 

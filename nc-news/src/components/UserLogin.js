@@ -1,7 +1,6 @@
 import React from 'react';
 import PT from 'prop-types';
 import { Row, Input, Icon } from 'react-materialize';
-import * as API from '../API';
 
 class UserLogin extends React.Component {
     state = {
@@ -13,17 +12,18 @@ class UserLogin extends React.Component {
             <div>
                <Row>
                    <form 
-                   onSubmit={(event) => {
-                       event.preventDefault(); 
-                       this.props.getUser(this.state.username)
-                       }}>
-                        <Input s={7} placeholder="Username"
-                        onChange={this.handleUsernameChange}
-                        ><Icon>account_circle</Icon></Input>
+                    onSubmit={(event) => {
+                    event.preventDefault(); 
+                    this.props.getUser(this.state.username)
+                    }}>
+                    <Input s={7} placeholder="Username"
+                    onChange={this.handleUsernameChange}>
+                    {this.props.loggedIn ?
+                        <Icon><img className="circle" alt={this.props.currentUser.name}
+                        src={`${this.props.currentUser.avatar_url}`} height="30" width="30"/></Icon> :
+                        <Icon>account_circle</Icon>}
+                    </Input>
                     </form>
-                    {this.props.loggedIn ? 
-                    <img class="circle valign"
-                    src={`${this.props.currentUser.avatar_url}`} height="65" width="65"/> : ''} 
                 </Row>
             </div>
         );
@@ -36,7 +36,8 @@ class UserLogin extends React.Component {
     } 
 
     static propTypes = {
-    
+        getUser: PT.func.isRequired,
+        currentUser: PT.object.isRequired
     }
 }
 

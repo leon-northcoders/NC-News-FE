@@ -19,3 +19,8 @@ export const getUser = (username) => {
     return axios.get(`${domain}/users/${username}`)
         .then(res => res.data.user)
 }
+
+export const updateVote = (articleId, query) => {
+    return axios.put(`${domain}/articles/${articleId}/${query}`)
+        .then(res => res)
+}

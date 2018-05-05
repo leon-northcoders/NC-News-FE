@@ -1,7 +1,8 @@
 import React from 'react';
 import PT from 'prop-types';
-import { Card, CardTitle } from 'react-materialize';
+import { Card, CardTitle, Row, Col, Icon, Chip } from 'react-materialize';
 import { Link } from 'react-router-dom';
+import Vote from './Vote';
 
 function Articles ({ articles, match, searchTerm }) {
     const topic = match.params.topic_id;
@@ -14,14 +15,25 @@ function Articles ({ articles, match, searchTerm }) {
 
     return (
         <div>
-            {displayArticles.map((article, i) => {
+            {displayArticles.sort((a, b) => b.votes - a.votes).map((article, i) => {
+                console.log(article.votes)
                 return (
-                    <div>
-                        <Card key={article._id} className='small'
-                            header={<CardTitle className="card-panel light-blue accent-1" image=''>{article.title}</CardTitle>}
-                            actions={[<Link className="red-text lighten-2" to={`/articles/${article._id}`}>Read More...</Link>]}>
-                            {Array.from(article.body).slice(0, 400).join('') + '...'}
-                        </Card> 
+                    <div key={article._id}>
+                     <Card height="auto" className='small'
+                        header={<CardTitle className="card-panel light-blue accent-1" image=''>{article.title}</CardTitle>}>
+                        <Row>
+                            <Col s={2}><Vote votes={article.votes}/></Col>
+                            <Col s={2}>
+                                <Chip><img className="circle" alt={''}
+                                    src={`${article.created_by.avatar_url}`} height="30" width="30"/>
+                                    {article.created_by.name}
+                                </Chip>
+                            </Col>
+                            <Col s={2}><Link to={`/topics/${article.belongs_to.title.toLowerCase()}`}>{article.belongs_to.title}</Link></Col>
+                            <Col s={1}><Icon>comment</Icon>{article.comments}</Col>
+                            <Col s={4} className="read-more"><Link className="red-text lighten-2" to={`/articles/${article._id}`}>Read More...</Link></Col>  
+                        </Row>  
+                    </Card>
                     </div>
                 );
             })}
@@ -30,7 +42,9 @@ function Articles ({ articles, match, searchTerm }) {
 }
 
 Articles.propTypes = {
-    
+    articles: PT.array.isRequired,
+    match: PT.object.isRequired,
+    searchTerm: PT.string.isRequired
 }
 
 export default Articles;

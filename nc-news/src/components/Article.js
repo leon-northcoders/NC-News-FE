@@ -1,7 +1,6 @@
 import React from 'react';
 import PT from 'prop-types';
 import { Card, CardTitle } from 'react-materialize';
-import { Link } from 'react-router-dom';
 import Comments from './Comments';
 
 function Article ({ articles, match, currentUser }) {
@@ -10,7 +9,7 @@ function Article ({ articles, match, currentUser }) {
 
     return (
         <div>
-            <Card key={article._id} className='small'
+            <Card className='small'
                 header={<CardTitle className="card-panel light-blue accent-1" image=''>{article.title}</CardTitle>}>
                 {article.body}
             </Card> 
@@ -21,7 +20,9 @@ function Article ({ articles, match, currentUser }) {
 }
 
 Article.propTypes = {
-    
+    articles: PT.array.isRequired,
+    match: PT.object.isRequired,
+    currentUser: PT.object.isRequired
 }
 
 export default Article;

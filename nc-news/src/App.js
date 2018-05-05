@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, NavLink, Switch } from 'react-router-dom';
-import { Navbar, NavItem, Card, CardTitle, Row, Col} from 'react-materialize';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { Navbar, Container, Row, Col, ProgressBar } from 'react-materialize';
 import Articles from './components/Articles';
 import Article from './components/Article';
 import Search from './components/Search';
@@ -29,11 +29,16 @@ class App extends Component {
   }
 
   render() {
-    return this.state.loading?  <h1> loading </h1> : (
-        <Router> 
+    return this.state.loading ?
+    <Row>
+      <Col s={12}>
+        <ProgressBar />
+      </Col>
+    </Row> : (
+        <Router>
           <div className="App">
             <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo"/>
+              <img src={logo} className="React-logo" alt="logo"/>
             </header> 
 
             <Navbar brand="Northcoders News" left> 
@@ -48,12 +53,14 @@ class App extends Component {
               />
               </li>
             </Navbar>  
-
-            <Route exact path="/" render={(props) => <Articles {...props} articles={this.state.articles} searchTerm={this.state.searchTerm}/>}/>
-            <Route path="/topics/:topic_id" render={(props) => <Articles {...props} articles={this.state.articles} searchTerm={this.state.searchTerm}/>}/>
-            <Route path="/articles/:article_id" render={(props) => <Article {...props} articles={this.state.articles} currentUser={this.state.currentUser}/>}/>
-            {/* <Route path="/users/:username" render={(props) => <UserProfile {...props}/>}/> */}
+            <Container>
+              <Route exact path="/" render={(props) => <Articles {...props} articles={this.state.articles} searchTerm={this.state.searchTerm}/>}/>
+              <Route path="/topics/:topic_id" render={(props) => <Articles {...props} articles={this.state.articles} searchTerm={this.state.searchTerm}/>}/>
+              <Route path="/articles/:article_id" render={(props) => <Article {...props} articles={this.state.articles} currentUser={this.state.currentUser}/>}/>
+              {/* <Route path="/users/:username" render={(props) => <UserProfile {...props}/>}/> */}
+            </Container>
           </div> 
+          
         </Router>      
     );
   }

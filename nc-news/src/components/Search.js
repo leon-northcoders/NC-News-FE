@@ -13,6 +13,7 @@ function Search ({ onSearchChange }) {
     }
 
     Search.propTypes = {
+        onSearchChange: PT.func.isRequired
 }
 
 export default Search;
