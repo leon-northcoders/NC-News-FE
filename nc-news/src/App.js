@@ -28,13 +28,18 @@ class App extends Component {
       })
   }
 
+  componentDidUpdate(){
+    API.getArticles()
+      .then(articles => {
+        this.setState({
+          articles,
+          loading: false,
+        })
+      })
+  }
+
   render() {
-    return this.state.loading ?
-    <Row>
-      <Col s={12}>
-        <ProgressBar />
-      </Col>
-    </Row> : (
+    return (
         <Router>
           <div className="App">
             <header className="App-header">
@@ -47,18 +52,24 @@ class App extends Component {
               <li><NavLink to="/topics/football">Football</NavLink></li>
               <li><NavLink to="/topics/cooking">Cooking</NavLink></li>
               <li><UserLogin 
-              getUser={this.getUser} 
+              loginUser={this.loginUser} 
               currentUser={this.state.currentUser}
               loggedIn={this.state.loggedIn}
               />
               </li>
-            </Navbar>  
+            </Navbar> 
+
+             {this.state.loading ?
+             <Row>
+               <Col s={12}>
+                 <ProgressBar />
+               </Col>
+             </Row> :
             <Container>
               <Route exact path="/" render={(props) => <Articles {...props} articles={this.state.articles} searchTerm={this.state.searchTerm}/>}/>
               <Route path="/topics/:topic_id" render={(props) => <Articles {...props} articles={this.state.articles} searchTerm={this.state.searchTerm}/>}/>
               <Route path="/articles/:article_id" render={(props) => <Article {...props} articles={this.state.articles} currentUser={this.state.currentUser}/>}/>
-              {/* <Route path="/users/:username" render={(props) => <UserProfile {...props}/>}/> */}
-            </Container>
+            </Container>}
           </div> 
           
         </Router>      
@@ -71,7 +82,7 @@ class App extends Component {
     })
   }
 
-  getUser = (name) => {
+  loginUser = (name) => {
     API.getUser(name)
     .then((user) => {  
         this.setState({

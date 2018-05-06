@@ -20,7 +20,16 @@ export const getUser = (username) => {
         .then(res => res.data.user)
 }
 
-export const updateVote = (articleId, query) => {
-    return axios.put(`${domain}/articles/${articleId}/${query}`)
-        .then(res => res)
+export const updateArticleVote = (articleId, query) => {
+    return axios.put(`${domain}/articles/${articleId}?${query}`)
+        .then(res => res.data.article)
+}
+
+export const updateCommentVote = (commentId, query) => {
+    return axios.put(`${domain}/comments/${commentId}?${query}`)
+        .then(res => res.data.comment)
+}
+
+export const deleteComment = (commentId) => {
+    return axios.delete(`${domain}/comments/${commentId}`)
 }

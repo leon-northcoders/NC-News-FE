@@ -14,7 +14,7 @@ class UserLogin extends React.Component {
                    <form 
                     onSubmit={(event) => {
                     event.preventDefault(); 
-                    this.props.getUser(this.state.username)
+                    this.props.loginUser(this.state.username)
                     }}>
                     <Input s={7} placeholder="Username"
                     onChange={this.handleUsernameChange}>
@@ -36,7 +36,7 @@ class UserLogin extends React.Component {
     } 
 
     static propTypes = {
-        getUser: PT.func.isRequired,
+        loginUser: PT.func.isRequired,
         currentUser: PT.object.isRequired
     }
 }
