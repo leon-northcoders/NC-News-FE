@@ -9,8 +9,7 @@ class Comments extends React.Component {
     state = {
         comments: [],
         newComment: '',
-        loading: true,
-        guestId: ''
+        loading: true
     }
 
     componentDidMount(){
@@ -21,13 +20,7 @@ class Comments extends React.Component {
                 comments: sortedComments,
                 loading: false
                 })
-            })
-        API.getUser("Guest")
-            .then(user => {
-                this.setState({
-                    guestId: user._id
-                })
-            })    
+            }) 
         }
 
     componentDidUpdate(){
@@ -82,7 +75,9 @@ class Comments extends React.Component {
                         </div>    
                     );
                 })}
-                <AddComment addComment={this.addComment} handleCommentInput={this.handleCommentInput} newComment={this.state.newComment} articleId={this.props.articleId}/>
+                <AddComment addComment={this.addComment} handleCommentInput={this.handleCommentInput} 
+                            newComment={this.state.newComment} articleId={this.props.articleId}
+                            currentUser={this.props.currentUser} loginUser={this.props.loginUser}/>
             </div>
         );
     }
@@ -96,7 +91,7 @@ class Comments extends React.Component {
     addComment = (articleId, comment) => {
         const body = {
             body: comment,
-            created_by: this.props.currentUser._id || this.state.guestId
+            created_by: this.props.currentUser._id
         }
         API.postComment(this.props.articleId, body)
 
@@ -109,13 +104,11 @@ class Comments extends React.Component {
         API.deleteComment(commentId)
     }
 
-    getGuest = () => {
-        API.getUser("Guest").then(user => user._id)
-    }
-
     static propTypes = {
         articleId: PT.string.isRequired,
-        currentUser: PT.object.isRequired
+        currentUser: PT.object.isRequired,
+        loginUser: PT.func.isRequired,
+        loggedIn: PT.bool.isRequired
     }
 }
 

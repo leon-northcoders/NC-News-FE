@@ -40,7 +40,8 @@ class Article extends React.Component {
                     </Col>
                 </Row>
             </Card> 
-            <Comments articleId={article._id} article={article} currentUser={this.props.currentUser}/>
+            <Comments articleId={article._id} article={article} currentUser={this.props.currentUser} 
+                      loginUser={this.props.loginUser}/> 
         </div>
         );
     }
@@ -57,7 +58,9 @@ class Article extends React.Component {
     static propTypes = {
         articles: PT.array.isRequired,
         match: PT.object.isRequired,
-        currentUser: PT.object.isRequired
+        currentUser: PT.object.isRequired,
+        loginUser: PT.func.isRequired,
+        loggedIn: PT.bool.isRequired
     }
 }
 

@@ -68,7 +68,7 @@ class App extends Component {
             <Container>
               <Route exact path="/" render={(props) => <Articles {...props} articles={this.state.articles} searchTerm={this.state.searchTerm}/>}/>
               <Route path="/topics/:topic_id" render={(props) => <Articles {...props} articles={this.state.articles} searchTerm={this.state.searchTerm}/>}/>
-              <Route path="/articles/:article_id" render={(props) => <Article {...props} articles={this.state.articles} currentUser={this.state.currentUser}/>}/>
+              <Route path="/articles/:article_id" render={(props) => <Article {...props} articles={this.state.articles} currentUser={this.state.currentUser} loginUser={this.loginUser}/>}/>
             </Container>}
           </div> 
           
@@ -82,8 +82,8 @@ class App extends Component {
     })
   }
 
-  loginUser = (name) => {
-    API.getUser(name)
+  loginUser = (username) => {
+    API.getUser(username)
     .then((user) => {  
         this.setState({
             currentUser: user,
