@@ -2,7 +2,7 @@ import React from 'react';
 import PT from 'prop-types';
 import { Input, Button } from 'react-materialize';
 
-class Comment extends React.Component {
+class AddComment extends React.Component {
     render () {
         return (
         <div> 
@@ -22,6 +22,7 @@ class Comment extends React.Component {
     handleAddCommentClick = (event) => {
         event.preventDefault();
         this.props.addComment(this.props.articleId, this.props.newComment)
+        event.target.value = ''
     }
 
     static propTypes = {
@@ -32,4 +33,4 @@ class Comment extends React.Component {
     }
 }
 
-export default Comment;
+export default AddComment;

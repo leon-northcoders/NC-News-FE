@@ -46,7 +46,7 @@ class App extends Component {
               <img src={logo} className="React-logo" alt="logo"/>
             </header> 
 
-            <Navbar brand="Northcoders News" left> 
+            <Navbar brand="Northcoders News" right> 
               <li><Search articles={this.state.articles} onSearchChange={this.onSearchChange}/></li>             
               <li><NavLink to="/topics/coding">Coding</NavLink></li>
               <li><NavLink to="/topics/football">Football</NavLink></li>

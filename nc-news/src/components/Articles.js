@@ -42,7 +42,7 @@ function Articles ({ articles, match, searchTerm }) {
                                     {article.comments}
                                 </Chip>    
                             </Col>
-                            <Col s={2} className="read-more">
+                            <Col s={2}>
                                 <Chip>
                                     <Link className="red-text lighten-2" to={`/articles/${article._id}`}>Read More...</Link>
                                 </Chip>    
