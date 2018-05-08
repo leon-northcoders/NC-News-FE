@@ -30,11 +30,15 @@
 }
 
 .log-out {
-  font-family: 'Gill Sans', Calibri, Trebuchet, sans-serif;
+  font-family: "Gill Sans", Calibri, Trebuchet, sans-serif;
   color: white;
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
