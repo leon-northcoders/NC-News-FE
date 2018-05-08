@@ -59,8 +59,7 @@ class Article extends React.Component {
         articles: PT.array.isRequired,
         match: PT.object.isRequired,
         currentUser: PT.object.isRequired,
-        loginUser: PT.func.isRequired,
-        loggedIn: PT.bool.isRequired
+        loginUser: PT.func.isRequired
     }
 }
 

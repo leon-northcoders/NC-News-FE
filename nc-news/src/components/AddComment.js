@@ -6,11 +6,22 @@ class AddComment extends React.Component {
     state = {
         submit: false
     }
+
+    componentDidMount(){
+        if(this.props.currentUser === {})
+        this.setState({
+            submit: false
+        })
+    }
     
-    componentWillReceiveProps(nextProps){
-       if(nextProps.currentUser !== this.props.currentUser)
+    componentWillReceiveProps(newProps){
+       if(newProps.currentUser.name)
         this.setState({
             submit: true
+        })
+        else 
+        this.setState({
+            submit: false
         })
     }
 
@@ -19,20 +30,19 @@ class AddComment extends React.Component {
         <div> 
             <form> 
                 <Input width="100%" placeholder="Add comment here..." type="textarea"
-                onChange={this.props.handleCommentInput}
-                />
+                onChange={this.props.handleCommentInput}/>
 
-                <Button onClick={this.handleGuestLoginClick}
-                disabled={this.state.submit}
-                waves="light" type="submit" name="action">Login as guest?
-                <Icon className="material-icons left">account_circle</Icon>
-                </Button>
+                    <Button onClick={this.handleGuestLoginClick}
+                    disabled={this.state.submit}
+                    waves="light" type="submit" name="action">Login as guest?
+                        <Icon className="material-icons left">account_circle</Icon>
+                    </Button>
 
-                <Button onClick={this.handleAddCommentClick} 
-                disabled={!this.state.submit}
-                waves="light" type="submit" name="action">Submit
-                <Icon className="material-icons right">send</Icon>
-                </Button> 
+                    <Button onClick={this.handleAddCommentClick} 
+                    disabled={!this.state.submit}
+                    waves="light" type="submit" name="action">Submit
+                        <Icon className="material-icons right">send</Icon>
+                    </Button> 
             </form>    
         </div>
         );
@@ -53,7 +63,6 @@ class AddComment extends React.Component {
         newComment: PT.string.isRequired,
         handleCommentInput: PT.func.isRequired,
         addComment: PT.func.isRequired,
-        loginUser: PT.func.isRequired,
         currentUser: PT.object.isRequired
     }
 }

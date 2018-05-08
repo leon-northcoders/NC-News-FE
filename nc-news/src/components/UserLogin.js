@@ -1,6 +1,6 @@
 import React from 'react';
 import PT from 'prop-types';
-import { Row, Input, Icon } from 'react-materialize';
+import { Row, Input, Icon, Button, Col } from 'react-materialize';
 
 class UserLogin extends React.Component {
     state = {
@@ -11,19 +11,31 @@ class UserLogin extends React.Component {
         return (
             <div>
                <Row>
-                   <form 
-                    onSubmit={(event) => {
-                    event.preventDefault(); 
-                    this.props.loginUser(this.state.username)
-                    }}>
-                    <Input s={7} placeholder="Username"
-                    onChange={this.handleUsernameChange}>
-                    {this.props.loggedIn ?
-                        <Icon><img className="circle" alt={this.props.currentUser.name}
-                        src={`${this.props.currentUser.avatar_url}`} height="30" width="30"/></Icon> :
-                        <Icon>account_circle</Icon>}
-                    </Input>
-                    </form>
+                    <Col s={8}>
+                        <Input placeholder="Username"
+                        onChange={this.handleUsernameChange}
+                        onKeyDown={(event) => {
+                            if(event.keyCode === 13)
+                            this.props.loginUser(this.state.username)
+                            }}>
+
+                        {this.props.loggedIn ?
+                            <Icon><img className="circle" alt={this.props.currentUser.name}
+                            src={`${this.props.currentUser.avatar_url}`} height="30" width="30"/></Icon> :
+                            <Icon>account_circle</Icon>}
+                        </Input>
+                    </Col>
+                    {this.props.currentUser.name ?
+                    <Col s={2}>
+                        <Button 
+                        onClick={(event) => {
+                            event.preventDefault();
+                            this.props.logoutUser()
+                        }}
+                        className="log-out" waves="light" flat>
+                            X
+                        </Button>
+                    </Col> : ''}    
                 </Row>
             </div>
         );
@@ -37,7 +49,8 @@ class UserLogin extends React.Component {
 
     static propTypes = {
         loginUser: PT.func.isRequired,
-        currentUser: PT.object.isRequired
+        currentUser: PT.object.isRequired,
+        logoutUser: PT.func.isRequired
     }
 }
 

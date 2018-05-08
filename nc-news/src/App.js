@@ -28,7 +28,7 @@ class App extends Component {
       })
   }
 
-  componentDidUpdate(){
+  componentDidUpdate(prevProps, prevState){
     API.getArticles()
       .then(articles => {
         this.setState({
@@ -55,6 +55,7 @@ class App extends Component {
               loginUser={this.loginUser} 
               currentUser={this.state.currentUser}
               loggedIn={this.state.loggedIn}
+              logoutUser={this.logoutUser}
               />
               </li>
             </Navbar> 
@@ -90,6 +91,13 @@ class App extends Component {
             loggedIn: true
           })
       })
+  }
+
+  logoutUser = () => {
+    this.setState({
+      currentUser: {},
+      loggedIn: false
+    })
   }
 } 
 

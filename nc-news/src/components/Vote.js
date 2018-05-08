@@ -7,7 +7,7 @@ class Vote extends React.Component {
         return (
             <div>
                 <Button onClick={this.handleVoteClick} value="VOTE=UP" waves='light' flat><Icon>arrow_upward</Icon></Button>
-                <h4>{this.props.article.votes}</h4>
+                    <h4>{this.props.article.votes}</h4>
                 <Button onClick={this.handleVoteClick} value="VOTE=DOWN" waves='light' flat><Icon>arrow_downward</Icon></Button>
             </div>
         );
@@ -21,7 +21,8 @@ class Vote extends React.Component {
 
 
 Vote.propTypes = {
-    article: PT.object.isRequired
+    article: PT.object.isRequired,
+    changeVote: PT.func.isRequired
 }
 
 export default Vote;

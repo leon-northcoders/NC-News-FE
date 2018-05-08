@@ -25,6 +25,11 @@ export const updateArticleVote = (articleId, query) => {
         .then(res => res.data.article)
 }
 
+export const updateCommentVote = (commentId, query) => {
+    return axios.put(`${domain}/comments/${commentId}?${query}`)
+        .then(res => res.data.comment)
+}
+
 export const deleteComment = (commentId) => {
     return axios.delete(`${domain}/comments/${commentId}`)
 }
