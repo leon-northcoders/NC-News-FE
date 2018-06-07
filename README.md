@@ -6,7 +6,7 @@ Northcoders News has articles which are divided into topics. Each article has us
 Users can also add comments about an article. Comments can also be up or down voted. A user can add comments and remove any comments which
 they have added.
 
-##Getting started
+## Getting started
 
 Link to NC-News web-app - https://nc-news-leon-fe.herokuapp.com
 
@@ -45,3 +45,6 @@ npm start
 ```
 http://localhost:3000/
 ```
+
+## Author
+### [leondelaimy](https://github.com/leondelaimy)
