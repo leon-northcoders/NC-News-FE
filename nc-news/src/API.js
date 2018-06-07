@@ -1,5 +1,5 @@
 import axios from "axios";
-const domain = `https://leon-nc-news.herokuapp.com/api`;
+const domain = `https://nc-news-leon-be.herokuapp.com/api`;
 
 export const getArticles = () => {
   return axios.get(`${domain}/articles`).then(res => res.data.articles);
