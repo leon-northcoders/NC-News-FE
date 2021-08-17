@@ -24,7 +24,7 @@ You will need to have Node installed before installing other dependencies. Infor
 
 1. Download a copy of the project through GitHub:
 ```
-git clone https://github.com/leondelaimy/NC-News-FE.git
+git clone https://github.com/leon-northcoders/NC-News-FE.git
 ```
 2. Move into the correct directory
 ```
