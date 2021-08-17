@@ -45,6 +45,3 @@ npm start
 ```
 http://localhost:3000/
 ```
-
-## Author
-### [leondelaimy](https://github.com/leondelaimy)
